@@ -1,3 +1,4 @@
+game.splash("This is really cool!", "SO W!")
 let mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
