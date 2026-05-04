@@ -202,6 +202,7 @@ function Wyatts_Role2 () {
     mySprite2.setVelocity(0, -100)
     Attack = true
     scene.cameraFollowSprite(mySprite2)
+    music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
     pause(1500)
     sprites.destroy(mySprite2, effects.fountain, 500)
     pause(500)
