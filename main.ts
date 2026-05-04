@@ -1,3 +1,6 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    Wyatts_Role2()
+})
 function Wyatts_Role () {
     scene.setBackgroundImage(img`
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -140,13 +143,89 @@ function Wyatts_Role () {
         c c c c c c e e 2 2 2 4 2 2 e e 
         c c c c c c e e 2 2 2 2 4 2 e e 
         `, SpriteKind.Player)
-    controller.moveSprite(mySprite, 100, 0)
+    controller.moveSprite(mySprite, 75, 0)
     tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleRedCrystal)
     tiles.setTileAt(tiles.getTileLocation(3, 14), assets.tile`transparency16`)
     scene.cameraFollowSprite(mySprite)
     statusbar = statusbars.create(20, 4, StatusBarKind.Health)
     statusbar.attachToSprite(mySprite, -21, 0)
 }
+function Wyatts_Role2 () {
+    controller.moveSprite(mySprite, 0, 0)
+    animation.runImageAnimation(
+    mySprite,
+    [img`
+        . . . . . . 5 4 4 5 . . . . . . 
+        . . . . . 5 4 4 4 4 5 . . . . . 
+        . . . . . 5 4 4 4 4 5 . . . . . 
+        . . . . . . 5 4 4 5 . . . . . . 
+        . . . . . . 5 4 4 5 . . . . . . 
+        . . . . . . . 2 e . . . . . . . 
+        . . . . . . . c e . . . . . . . 
+        . . . . . . . e 2 . . . . . . . 
+        . . . . . . e e 4 e . . . . . . 
+        . . . . . . e 2 4 e . . . . . . 
+        . . . . . c c c e e e . . . . . 
+        . . . . e e 2 2 2 4 e e . . . . 
+        . . c f f f c c e e f f e e . . 
+        . c c c c e e 2 2 2 2 4 2 e e . 
+        c c c c c c e e 2 2 2 4 2 2 e e 
+        c c c c c c e e 2 2 2 2 4 2 e e 
+        `],
+    500,
+    false
+    )
+    mySprite2 = sprites.create(img`
+        6 6 9 
+        6 9 8 
+        9 8 6 
+        6 9 8 
+        6 8 9 
+        8 9 6 
+        9 8 6 
+        6 9 8 
+        6 8 9 
+        8 9 6 
+        9 8 6 
+        6 9 8 
+        6 8 9 
+        8 9 6 
+        9 8 6 
+        6 9 8 
+        6 8 9 
+        8 9 6 
+        9 8 6 
+        6 9 8 
+        `, SpriteKind.Player)
+    mySprite2.setPosition(mySprite.x, mySprite.y)
+    mySprite2.setVelocity(0, -100)
+    pause(500)
+    animation.runImageAnimation(
+    mySprite,
+    [img`
+        . . . . . . . c d . . . . . . . 
+        . . . . . . . c d . . . . . . . 
+        . . . . . . . c d . . . . . . . 
+        . . . . . . . c b . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . c 2 . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . e 2 . . . . . . . 
+        . . . . . . e e 4 e . . . . . . 
+        . . . . . . e 2 4 e . . . . . . 
+        . . . . . c c c e e e . . . . . 
+        . . . . e e 2 2 2 4 e e . . . . 
+        . . c f f f c c e e f f e e . . 
+        . c c c c e e 2 2 2 2 4 2 e e . 
+        c c c c c c e e 2 2 2 4 2 2 e e 
+        c c c c c c e e 2 2 2 2 4 2 e e 
+        `],
+    500,
+    false
+    )
+    controller.moveSprite(mySprite, 75, 0)
+}
+let mySprite2: Sprite = null
 let statusbar: StatusBarSprite = null
 let mySprite: Sprite = null
 Wyatts_Role()
