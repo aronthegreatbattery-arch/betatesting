@@ -150,6 +150,9 @@ function Wyatts_Role () {
     statusbar = statusbars.create(20, 4, StatusBarKind.Health)
     statusbar.attachToSprite(mySprite, -21, 0)
     statusbar.setColor(4, 12)
+    Meteor = 1
+    pause(200)
+    Meteor = 0
 }
 function Wyatts_Role2 () {
     controller.moveSprite(mySprite, 0, 0)
@@ -197,13 +200,13 @@ function Wyatts_Role2 () {
         8 9 6 
         9 8 6 
         6 9 8 
-        `, SpriteKind.Player)
+        `, SpriteKind.Projectile)
     mySprite2.setPosition(mySprite.x, mySprite.y)
     mySprite2.setVelocity(0, -100)
     Attack = true
     scene.cameraFollowSprite(mySprite2)
     music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
-    pause(1500)
+    pause(1000)
     sprites.destroy(mySprite2, effects.fountain, 500)
     pause(500)
     Attack = false
@@ -233,9 +236,41 @@ function Wyatts_Role2 () {
     )
     controller.moveSprite(mySprite, 75, 0)
 }
+scene.onOverlapTile(SpriteKind.Enemy, sprites.dungeon.darkGroundNorth, function (sprite, location) {
+    sprites.destroy(mySprite3, effects.fire, 500)
+    Meteor = 1
+    pause(200)
+    Meteor = 0
+})
+let mySprite3: Sprite = null
 let Attack = false
 let mySprite2: Sprite = null
+let Meteor = 0
 let statusbar: StatusBarSprite = null
 let mySprite: Sprite = null
 Wyatts_Role()
 game.splash("THIS GAME IS,", "SO W!")
+game.onUpdateInterval(100, function () {
+    if (Meteor == 1) {
+        mySprite3 = sprites.create(img`
+            . . . . . . . c c c a c . . . . 
+            . . c c b b b a c a a a c . . . 
+            . c c a b a c b a a a b c c . . 
+            . c a b c f f f b a b b b a . . 
+            . c a c f f f 8 a b b b b b a . 
+            . c a 8 f f 8 c a b b b b b a . 
+            c c c a c c c c a b c f a b c c 
+            c c a a a c c c a c f f c b b a 
+            c c a b 6 a c c a f f c c b b a 
+            c a b c 8 6 c c a a a b b c b c 
+            c a c f f a c c a f a c c c b . 
+            c a 8 f c c b a f f c b c c c . 
+            . c b c c c c b f c a b b a c . 
+            . . a b b b b b b b b b b b c . 
+            . . . c c c c b b b b b c c . . 
+            . . . . . . . . c b b c . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnRandomTile(mySprite3, sprites.jewels.jewel2)
+        mySprite3.setVelocity(randint(5, 50), 65)
+    }
+})
