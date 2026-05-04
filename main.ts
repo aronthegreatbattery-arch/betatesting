@@ -149,6 +149,7 @@ function Wyatts_Role () {
     scene.cameraFollowSprite(mySprite)
     statusbar = statusbars.create(20, 4, StatusBarKind.Health)
     statusbar.attachToSprite(mySprite, -21, 0)
+    statusbar.setColor(4, 12)
 }
 function Wyatts_Role2 () {
     controller.moveSprite(mySprite, 0, 0)
