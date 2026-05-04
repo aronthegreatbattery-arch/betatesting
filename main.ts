@@ -1,3 +1,6 @@
+function Wyatts_Role () {
+	
+}
 game.splash("This is really cool!", "SO W!")
 let mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -17,3 +20,4 @@ let mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
+Wyatts_Role()
