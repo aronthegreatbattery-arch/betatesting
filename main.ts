@@ -140,7 +140,7 @@ function Wyatts_Role () {
         c c c c c c e e 2 2 2 4 2 2 e e 
         c c c c c c e e 2 2 2 2 4 2 e e 
         `, SpriteKind.Player)
-    controller.moveSprite(mySprite, 75, 0)
+    controller.moveSprite(mySprite, 100, 0)
     tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleRedCrystal)
     tiles.setTileAt(tiles.getTileLocation(3, 14), assets.tile`transparency16`)
     scene.cameraFollowSprite(mySprite)
@@ -148,17 +148,24 @@ function Wyatts_Role () {
     statusbar.attachToSprite(mySprite, -21, 0)
     statusbar.setColor(4, 12)
     Meteor = 1
-    pause(200)
-    Meteor = 0
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Wyatts_Role2()
 })
-scene.onOverlapTile(SpriteKind.Enemy, sprites.dungeon.darkGroundNorth, function (sprite, location) {
-    sprites.destroy(mySprite3, effects.fire, 500)
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
+    mySprite.setVelocity(0, 0)
     Meteor = 1
-    pause(200)
+    sprites.destroy(mySprite3, effects.halo, 500)
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    statusbar.value += -25
     Meteor = 0
+    music.play(music.melodyPlayable(music.powerDown), music.PlaybackMode.UntilDone)
+})
+scene.onOverlapTile(SpriteKind.Enemy, sprites.dungeon.darkGroundNorth, function (sprite, location) {
+    sprites.destroy(mySprite3, effects.halo, 500)
+    Meteor = 1
+    statusbar.value += -10
 })
 function Wyatts_Role2 () {
     controller.moveSprite(mySprite, 0, 0)
@@ -207,13 +214,14 @@ function Wyatts_Role2 () {
         9 8 6 
         6 9 8 
         `, SpriteKind.Projectile)
+    mySprite2.startEffect(effects.fountain)
     mySprite2.setPosition(mySprite.x, mySprite.y)
     mySprite2.setVelocity(0, -100)
     Attack = true
     scene.cameraFollowSprite(mySprite2)
     music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
     pause(1000)
-    sprites.destroy(mySprite2, effects.fountain, 500)
+    sprites.destroy(mySprite2, effects.coolRadial, 500)
     pause(500)
     Attack = false
     scene.cameraFollowSprite(mySprite)
@@ -242,6 +250,7 @@ function Wyatts_Role2 () {
     )
     controller.moveSprite(mySprite, 75, 0)
 }
+let statusbar2: StatusBarSprite = null
 let Attack = false
 let mySprite2: Sprite = null
 let mySprite3: Sprite = null
@@ -270,7 +279,15 @@ game.onUpdateInterval(100, function () {
             . . . c c c c b b b b b c c . . 
             . . . . . . . . c b b c . . . . 
             `, SpriteKind.Enemy)
+        mySprite3.startEffect(effects.fire)
         tiles.placeOnRandomTile(mySprite3, sprites.jewels.jewel2)
-        mySprite3.setVelocity(randint(5, 50), 65)
+        mySprite3.setVelocity(randint(-25, 25), 65)
+        Meteor = 0
+        statusbar2 = statusbars.create(1, 50, StatusBarKind.Health)
+        statusbar2.attachToSprite(mySprite3)
+        statusbar2.setColor(2, 2)
+    } else if (statusbar.value == 0) {
+        game.setGameOverEffect(false, effects.dissolve)
+        game.gameOver(false)
     }
 })
