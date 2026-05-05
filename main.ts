@@ -1,6 +1,3 @@
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    Wyatts_Role2()
-})
 function Wyatts_Role () {
     scene.setBackgroundImage(img`
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -154,6 +151,15 @@ function Wyatts_Role () {
     pause(200)
     Meteor = 0
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    Wyatts_Role2()
+})
+scene.onOverlapTile(SpriteKind.Enemy, sprites.dungeon.darkGroundNorth, function (sprite, location) {
+    sprites.destroy(mySprite3, effects.fire, 500)
+    Meteor = 1
+    pause(200)
+    Meteor = 0
+})
 function Wyatts_Role2 () {
     controller.moveSprite(mySprite, 0, 0)
     animation.runImageAnimation(
@@ -236,15 +242,9 @@ function Wyatts_Role2 () {
     )
     controller.moveSprite(mySprite, 75, 0)
 }
-scene.onOverlapTile(SpriteKind.Enemy, sprites.dungeon.darkGroundNorth, function (sprite, location) {
-    sprites.destroy(mySprite3, effects.fire, 500)
-    Meteor = 1
-    pause(200)
-    Meteor = 0
-})
-let mySprite3: Sprite = null
 let Attack = false
 let mySprite2: Sprite = null
+let mySprite3: Sprite = null
 let Meteor = 0
 let statusbar: StatusBarSprite = null
 let mySprite: Sprite = null
