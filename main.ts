@@ -282,10 +282,11 @@ game.onUpdateInterval(100, function () {
         mySprite3.startEffect(effects.fire)
         tiles.placeOnRandomTile(mySprite3, sprites.jewels.jewel2)
         mySprite3.setVelocity(randint(-25, 25), 65)
-        Meteor = 0
-        statusbar2 = statusbars.create(1, 50, StatusBarKind.Health)
-        statusbar2.attachToSprite(mySprite3)
+        statusbar2 = statusbars.create(2, 75, StatusBarKind.Health)
+        statusbar2.attachToSprite(mySprite3, -10, 24)
         statusbar2.setColor(2, 2)
+        pause(500)
+        Meteor = 0
     } else if (statusbar.value == 0) {
         game.setGameOverEffect(false, effects.dissolve)
         game.gameOver(false)
