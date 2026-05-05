@@ -154,18 +154,22 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
     mySprite.setVelocity(0, 0)
-    Meteor = 1
     sprites.destroy(mySprite3, effects.halo, 500)
+    Meteor = 1
+})
+info.onScore(25, function () {
+	
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     statusbar.value += -25
     Meteor = 0
-    music.play(music.melodyPlayable(music.powerDown), music.PlaybackMode.UntilDone)
+    music.play(music.melodyPlayable(music.powerDown), music.PlaybackMode.InBackground)
+    Meteor = 1
 })
 scene.onOverlapTile(SpriteKind.Enemy, sprites.dungeon.darkGroundNorth, function (sprite, location) {
     sprites.destroy(mySprite3, effects.halo, 500)
-    Meteor = 1
     statusbar.value += -10
+    Meteor = 1
 })
 function Wyatts_Role2 () {
     controller.moveSprite(mySprite, 0, 0)
