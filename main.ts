@@ -158,7 +158,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
     Meteor = 1
 })
 info.onScore(25, function () {
-	
+    Wyatts_Role3()
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     statusbar.value += -25
@@ -166,6 +166,9 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     music.play(music.melodyPlayable(music.powerDown), music.PlaybackMode.InBackground)
     Meteor = 1
 })
+function Wyatts_Role3 () {
+	
+}
 scene.onOverlapTile(SpriteKind.Enemy, sprites.dungeon.darkGroundNorth, function (sprite, location) {
     sprites.destroy(mySprite3, effects.halo, 500)
     statusbar.value += -10

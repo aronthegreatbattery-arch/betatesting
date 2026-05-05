@@ -4,7 +4,8 @@
     "dependencies": {
         "device": "*",
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
-        "multiplayer": "*"
+        "multiplayer": "*",
+        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3"
     },
     "files": [
         "main.blocks",
